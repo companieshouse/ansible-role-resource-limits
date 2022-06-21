@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Companies House
+  description: Configures system resource limits
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Amazon
+      versions:
+        - all
+
+  galaxy_tags:
+    - pam
+    - resource
+
+dependencies: []

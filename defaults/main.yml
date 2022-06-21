@@ -1,0 +1,15 @@
+---
+
+resource_limits_global:
+  hard:
+    nofile: 8192
+    nproc: 4096
+    stack: unlimited
+    msgqueue: 819200
+  soft:
+    nofile: 8192
+    nproc: 4096
+    stack: 10240
+    msgqueue: 819200
+
+resource_limits_remove_existing: false

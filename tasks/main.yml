@@ -1,0 +1,31 @@
+---
+
+- name: Find existing resource limit configs
+  find:
+    paths: /etc/security/limits.d
+    patterns: "*"
+  register: resource_limit_configs
+  when: resource_limits_remove_existing
+
+- name: Removing {{ item.path }} resource limit config
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ resource_limit_configs.files }}"
+  when: resource_limits_remove_existing
+
+- name: Set hard global resource limits
+  pam_limits:
+    domain: '*'
+    limit_type: hard
+    limit_item: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ resource_limits_global.hard | dict2items }}"
+
+- name: Set soft global resource limits
+  pam_limits:
+    domain: '*'
+    limit_type: soft
+    limit_item: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ resource_limits_global.soft | dict2items }}"
