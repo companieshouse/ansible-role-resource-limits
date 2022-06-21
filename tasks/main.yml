@@ -7,7 +7,7 @@
   register: resource_limit_configs
   when: resource_limits_remove_existing
 
-- name: Removing {{ item.path }} resource limit config
+- name: Remove existing resource limit configs
   file:
     path: "{{ item.path }}"
     state: absent
